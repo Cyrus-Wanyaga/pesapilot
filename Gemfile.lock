@@ -1,0 +1,15 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    bigdecimal (3.3.1)
+    sequel (5.98.0)
+      bigdecimal
+
+PLATFORMS
+  x64-mingw-ucrt
+
+DEPENDENCIES
+  sequel
+
+BUNDLED WITH
+   2.4.10

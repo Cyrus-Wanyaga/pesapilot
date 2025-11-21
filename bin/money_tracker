@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+# bin/money_tracker
+require_relative "../lib/pesa_pilot/pesa_pilot"
+
+include PesaPilot
+
+cli = CLI.new
+cli.run(ARGV)
