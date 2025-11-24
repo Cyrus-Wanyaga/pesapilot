@@ -5,8 +5,9 @@ require 'securerandom'
 module PesaPilot
     module App
         class MoneyTrackerApp
-            def initialize(wallet_repo:)
+            def initialize(wallet_repo:, transactions_repo:)
                 @wallet_repo = wallet_repo
+                @transactions_repo = transactions_repo
             end
 
             def add_wallet(name:, type:, initial_balance:)
@@ -25,6 +26,34 @@ module PesaPilot
                 )
 
                 @wallet_repo.create(wallet)
+            end
+
+            def record_transaction(wallet:, amount:, timestamp:, category:, description:)
+                id = SecureRandom.uuid
+
+                transaction = Core::Transaction.new(
+                    id: id,
+                    wallet_id: wallet.id,
+                    amount: amount,
+                    category: category,
+                    description: description,
+                    timestamp: timestamp
+                )
+
+                @transactions_repo.create(transaction)
+
+                new_balance =
+                if category.to_s.downcase == "expense"
+                    wallet.current_balance - amount
+                else 
+                    wallet.current_balance + amount
+                end
+
+                @wallet_repo.update_balance(wallet_id: wallet.id, new_balance: new_balance)
+            end
+
+            def get_total_balance()
+                @wallet_repo.all().sum(&:current_balance)
             end
         end
     end

@@ -10,7 +10,7 @@ module PesaPilot
                 @wallet_id = wallet_id
                 @timestamp = timestamp.is_a?(Time) ? timestamp : Time.parse(timestamp.to_s)
                 @amount = amount.to_f
-                @category = category.to_sym
+                @category = category.to_s
                 @description = description
             end
 

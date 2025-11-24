@@ -21,7 +21,7 @@ module PesaPilot
                 wallet
             end
 
-            def update_balance(wallet_id, new_balance)
+            def update_balance(wallet_id:, new_balance:)
                 @table.where(id: wallet_id).update(current_balance: new_balance)
             end
 
