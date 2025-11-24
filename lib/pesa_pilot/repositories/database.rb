@@ -4,7 +4,7 @@ require 'sequel'
 
 module PesaPilot
     module Repositories
-        module database
+        module Database
             def self.connect_sqlite(path)
                 db = Sequel.sqlite(path)
                 db

@@ -2,7 +2,7 @@
 
 module PesaPilot
     module Core
-        class transaction
+        class Transaction
             attr_accessor :id, :wallet_id, :timestamp, :amount, :category, :description
 
             def initialize(id:, wallet_id:, timestamp:, amount:, category:, description: '')

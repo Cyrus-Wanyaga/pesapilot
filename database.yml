@@ -1,0 +1,57 @@
+# config/database.yml
+
+# The database configuration system supports multiple adapters.
+# Set DB_ADAPTER in your environment to: sqlite | postgres | mysql2
+
+default: &default
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  adapter: <%= ENV.fetch("DB_ADAPTER", "sqlite") %>
+
+  # === SQLite (default) ===
+  # Uses local file in db/pesa_pilot.sqlite3
+  database: db/pesa_pilot.sqlite3
+
+  # === PostgreSQL (if DB_ADAPTER=postgres) ===
+  # Uncomment if using PostgreSQL:
+  # host: <%= ENV.fetch("DB_HOST", "localhost") %>
+  # port: <%= ENV.fetch("DB_PORT", 5432) %>
+  # user: <%= ENV.fetch("DB_USER", "postgres") %>
+  # password: <%= ENV.fetch("DB_PASSWORD", "") %>
+  # database: <%= ENV.fetch("DB_NAME", "pesa_pilot_dev") %>
+
+  # === MySQL (if DB_ADAPTER=mysql2) ===
+  # host: <%= ENV.fetch("DB_HOST", "localhost") %>
+  # port: <%= ENV.fetch("DB_PORT", 3306) %>
+  # user: <%= ENV.fetch("DB_USER", "root") %>
+  # password: <%= ENV.fetch("DB_PASSWORD", "") %>
+  # database: <%= ENV.fetch("DB_NAME", "pesa_pilot_dev") %>
+
+test:
+  <<: *default
+  adapter: sqlite
+  database: db/pesa_pilot_test.sqlite3
+
+production:
+  <<: *default
+  adapter: <%= ENV.fetch("DB_ADAPTER", "sqlite") %>
+
+  # SQLite (simple deployment)
+  database: db/pesa_pilot.sqlite3
+
+  # PostgreSQL (recommended for multi-user)
+  # host: <%= ENV["DB_HOST"] %>
+  # port: <%= ENV["DB_PORT"] %>
+  # user: <%= ENV["DB_USER"] %>
+  # password: <%= ENV["DB_PASSWORD"] %>
+  # database: <%= ENV["DB_NAME"] %>
+
+  # MySQL2
+  # host: <%= ENV["DB_HOST"] %>
+  # port: <%= ENV["DB_PORT"] %>
+  # user: <%= ENV["DB_USER"] %>
+  # password: <%= ENV["DB_PASSWORD"] %>
+  # database: <%= ENV["DB_NAME"] %>
